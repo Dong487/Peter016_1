@@ -42,7 +42,7 @@ class HomeViewModel: ObservableObject{
         
     }
     
-    func result() -> (title:String ,description:String){
+    func result() -> (title:String ,description1:String){
         // 小於 20
         guard self.totalPoints >= 20  else {
             return ("較為膽小的內向者", "你屬於那內傾性格，為人比較內向，處事風格有些優柔寡斷，常常害怕犯錯誤，習慣自我反省，社交場所上會很害羞，最害怕麻煩，所以不喜歡參加不必要的活動，也不想認識沒有關係的人。情緒常常處在比較低落的狀態，常常以弟弟、妹妹自稱，希望得到別人的保護與支持。")
@@ -104,6 +104,7 @@ struct HomeView_Previews: PreviewProvider {
 
 extension HomeView{
     
+    // 做測驗時的View
     private var QuestionView: some View{
         ZStack {
             Image("Background1")
@@ -143,9 +144,9 @@ extension HomeView{
                                         .background(
                                             Image("OptionBackground")
                                                 .resizable()
-                                                .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height / 15 - 5)
+                                                .frame(width: UIScreen.main.bounds.width - 70, height: UIScreen.main.bounds.height / 15 - 5)
                                         )
-                                        .frame(width: UIScreen.main.bounds.width - 100, height: UIScreen.main.bounds.height / 15)
+                                        .frame(width: UIScreen.main.bounds.width - 80, height: UIScreen.main.bounds.height / 15)
                                 }
                             }
                         }
@@ -156,6 +157,7 @@ extension HomeView{
         }
     }
     
+    // 顯示 測驗結果 的View
     private var ResultView: some View{
         ZStack{
             Image("Background1")
@@ -179,14 +181,11 @@ extension HomeView{
                     Image(systemName: "magnifyingglass")
                         .font(.title)
                 )
-                .frame(width: UIScreen.main.bounds.width / 2 - 85 , height: UIScreen.main.bounds.width / 2 - 85)
+                .frame(width: UIScreen.main.bounds.width / 2 - 115 , height: UIScreen.main.bounds.width / 2 - 115)
                 .offset(y: UIScreen.main.bounds.width / 2 - 30)
                 .onTapGesture {
                     viewModel.reset()
                 }
-            
-
-             
             
             VStack(spacing: 25){
                 Text(viewModel.result().title)
@@ -197,7 +196,7 @@ extension HomeView{
                     .shadow(color: .black.opacity(0.3), radius: 1, x: 1.2, y: 1.2)
                     .shadow(color: .orange.opacity(0.4), radius: 2, x: -1, y: -1)
                     
-                Text(viewModel.result().description)
+                Text(viewModel.result().description1)
                     .font(.body.bold())
                     .foregroundColor(.black)
                     .shadow(color: .white.opacity(0.7), radius: 0.5, x: 1, y: 1)
